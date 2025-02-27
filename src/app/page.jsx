@@ -10,20 +10,15 @@ import HomeBlog from "./blog/homeblog";
 import JoinUsForm from "./(routes)/components/join-us";
 import ContactUsForm from "./(routes)/components/contact-us";
 
-
 export default function Home() {
   return (
     <>
-    
-    <HomeClient/>        <HistorySection /> 
-    <VisionSection />
-    
-   
-        <GurukulFoundation />
-        <PhotoGallery />
-        <AnnacharaSection />
-     <HomeBlog/>
-
-    <Footer/></>
+      <HomeClient /> <HistorySection />
+      <VisionSection />
+      <GurukulFoundation />
+      <PhotoGallery />
+      <AnnacharaSection />
+      <HomeBlog />
+    </>
   );
 }
