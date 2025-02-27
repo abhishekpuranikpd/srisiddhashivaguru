@@ -5,19 +5,113 @@ import {
   ChevronDown,
   Menu,
   X,
-  Briefcase,
-  LogIn,
-  UserPlus,
+  Youtube,
   Twitter,
-  Github,
   Facebook,
   Instagram,
-  Youtube,
-} from "lucide-react"; // Add relevant social media icons
+  PlusCircle,
+} from "lucide-react";
+
+const menuItems = [
+  {
+    label: "Home",
+    href: "/",
+    hasSubmenu: false,
+  },
+  {
+    label: "About",
+    href: "#",
+    hasSubmenu: true,
+    submenu: [
+      { label: "About Swamiji", href: "#" },
+      { label: "About Math", href: "" },
+    ],
+  },
+  {
+    label: "Seva",
+    href: "#",
+  },
+ 
+  {
+    label: "Programs",
+    href: "#",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Daily Programs", href: "#" },
+      { label: "Weekly Programs", href: "" },
+      { label: "Monthly Programs", href: "" },
+      { label: "yearly Programs", href: "" },
+    ],
+  },
+  {
+    label: "Our Reach",
+    href: "#",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Projects", href: "#" },
+      { label: "Publications", href: "" },
+    ],
+  },
+  {
+    label: "Contact US",
+    href: "#",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Join with US", href: "#" },
+      { label: "Donation", href: "#" },
+    ],
+  }, {
+    label: "Blog",
+    href: "/blog",
+  },
+  {
+    label: "Aashram's",
+    href: "#",
+    hasSubmenu: true,
+    submenu: [
+      { label: "", href: "#" },
+      { label: "", href: "#" },
+    ],
+  },
+  {
+    label: "Institution",
+    href: "#",
+    hasSubmenu: true,
+    submenu: [
+      { label: "", href: "#" },
+      { label: "", href: "#" },
+    ],
+  },
+];
+
+const socialLinks = [
+  {
+    platform: "Youtube",
+    href: "https://youtube.com",
+    icon: <Youtube className="h-6 w-6 text-white hover:text-gray-300" />,
+  },
+  {
+    platform: "Twitter",
+    href: "https://twitter.com",
+    icon: <Twitter className="h-6 w-6 text-white hover:text-gray-300" />,
+  },
+  {
+    platform: "Facebook",
+    href: "https://facebook.com",
+    icon: <Facebook className="h-6 w-6 text-white hover:text-gray-300" />,
+  },
+  {
+    platform: "Instagram",
+    href: "https://instagram.com",
+    icon: <Instagram className="h-6 w-6 text-white hover:text-gray-300" />,
+  },
+];
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const [activeSubmenu, setActiveSubmenu] = useState(null); // Track the active submenu
+
   const drawerRef = useRef(null);
 
   useEffect(() => {
@@ -48,6 +142,11 @@ const NavBar = () => {
     setIsOpen((prev) => !prev);
   };
 
+  // Function to toggle a submenu's visibility
+  const toggleSubmenu = (index) => {
+    setActiveSubmenu(activeSubmenu === index ? null : index);
+  };
+
   return (
     <nav
       className={`fixed px-2 md:px-16 lg:px-20 top-0 z-20 w-full mb-4 transition-all duration-300 ${
@@ -57,50 +156,62 @@ const NavBar = () => {
       <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
         <Link href="/">
           <span className="flex cursor-pointer items-center">
-            <span className="self-center text-2xl font-bold  text-[#fff]">
+            <span className="self-center text-2xl font-bold text-[#fff]">
               Siddharudh Math
             </span>
           </span>
         </Link>
- 
-<div className=" hidden lg:flex  flex-col space-y-2">   <div className="flex space-x-4">
-<Link href="https://twitter.com" target="_blank">
-              <Youtube className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-            <Link href="https://twitter.com" target="_blank">
-              <Twitter className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-           
-            <Link href="https://facebook.com" target="_blank">
-              <Facebook className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-            <Link href="https://instagram.com" target="_blank">
-              <Instagram className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-          </div>
 
-        <div className="hidden lg:flex space-x-8">
-          <Link href="/about">
-            <span className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05]  flex items-center">
-              About
-            </span>
-          </Link>
-          {/* Add more items to the upper navigation bar for larger screens */}
-          <Link href="/services">
-            <span className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05] flex items-center">
-              Services
-            </span>
-          </Link>
-          <Link href="/contact">
-            <span className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05] flex items-center">
-              Contact
-            </span>
-          </Link>
-          {/* Social Media Icons */}
-       
-        </div>
-        </div>
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex space-x-8 items-center">
+  {menuItems.map((item, index) => (
+    <div key={index} className="relative group">
+      {/* Parent Menu Item */}
+      <Link href={item.href}>
+        <span className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05]">
+          {item.label}
+        </span>
+      </Link>
 
+      {/* Submenu (Visible on Hover, Styled) */}
+      {item.hasSubmenu && (
+        <div className="absolute left-0 mt-2 px-4 bg-[#c5341c] rounded-xl shadow-lg p-2 min-w-max opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-300">
+          <nav className="list-none text-left font-semibold space-y-3">
+            {item.submenu.map((subItem, subIndex) => (
+              <li key={subIndex} className="whitespace-nowrap">
+                <Link href={subItem.href}>
+                  <span
+                    className="text-[#fff] cursor-pointer pb-2 hover:text-[#FFCB05] border-b-[3px]"
+                    style={{
+                      borderImage:
+                        "linear-gradient(to right, transparent 10%, #FFCB05 50%, transparent 90%)",
+                      borderImageSlice: 1,
+                    }}
+                  >
+                    {subItem.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </nav>
+        </div>
+      )}
+    </div>
+  ))}
+
+  {/* Social Icons */}
+  <div className="flex space-x-4">
+    {socialLinks.map((social, index) => (
+      <Link key={index} href={social.href} target="_blank">
+        {social.icon}
+      </Link>
+    ))}
+  </div>
+</div>
+
+
+
+        {/* Mobile Hamburger */}
         <div className="flex lg:hidden">
           <button
             onClick={toggleDrawer}
@@ -110,6 +221,7 @@ const NavBar = () => {
           </button>
         </div>
 
+        {/* Mobile Drawer */}
         <div
           ref={drawerRef}
           className={`fixed top-0 h-full transition-all duration-300 w-[80%] ease-in-out lg:hidden bg-[#C5341c] shadow-lg ${
@@ -126,52 +238,53 @@ const NavBar = () => {
           </div>
           <div className="p-4 px-10 h-full pt-6">
             <ol className="flex font-semibold flex-col space-y-4">
-              <li className="border-b border-[#FFCB05] pb-2">
-                <Link href="/">
-                  <span className="text-white hover:underline hover:underline-offset-8 flex items-center font-semibold">
-                    Home
-                  </span>
-                </Link>
-              </li>
-              <li className="border-b border-[#FFCB05] pb-2">
-                <Link href="/about">
-                  <span className="text-white hover:underline hover:underline-offset-8 flex items-center font-semibold">
-                    About
-                  </span>
-                </Link>
-              </li>
-              <li className="border-b border-[#FFCB05] pb-2">
-                <Link href="/services">
-                  <span className="text-white hover:underline hover:underline-offset-8 flex items-center font-semibold">
-                    Services
-                  </span>
-                </Link>
-              </li>
-              <li className="border-b border-[#FFCB05] pb-2">
-                <Link href="/contact">
-                  <span className="text-white hover:underline hover:underline-offset-8 flex items-center font-semibold">
-                    Contact
-                  </span>
-                </Link>
-              </li>
+              {menuItems.map((item, index) => (
+                <li key={index} className="border-b border-[#FFCB05] pb-2">
+                  <div className="flex justify-between items-center">
+                    <Link href={item.href}>
+                      <span className="text-white hover:underline hover:underline-offset-8 flex items-center">
+                        {item.label}
+                      </span>
+                    </Link>
+                    {item.hasSubmenu && (
+                      <button
+                        onClick={() => toggleSubmenu(index)}
+                        className="text-white flex justify-end items-center hover:text-[#ffcb05]"
+                      >
+                        <PlusCircle
+                          className={`h-5 w-5 ${
+                            activeSubmenu === index ? "rotate-45" : ""
+                          } transition-transform duration-300`}
+                        />
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Submenu */}
+                  {item.hasSubmenu && activeSubmenu === index && (
+                    <ul className="ml-4 mt-2 space-y-2">
+                      {item.submenu.map((subItem, subIndex) => (
+                        <li key={subIndex}>
+                          <Link href={subItem.href}>
+                            <span className="block text-white hover:text-[#ffcb05]">
+                              {subItem.label}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
             </ol>
-    {/* Social Media Icons */}
-    <div className="flex mt-6 space-x-4">
-    <Link href="https://twitter.com" target="_blank">
-              <Youtube className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-            <Link href="https://twitter.com" target="_blank">
-              <Twitter className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-           
-            <Link href="https://facebook.com" target="_blank">
-              <Facebook className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-            <Link href="https://instagram.com" target="_blank">
-              <Instagram className="h-6 w-6 text-white hover:text-gray-300 border-r pr-2" />
-            </Link>
-          </div>
-    
+            {/* Social Icons */}
+            <div className="flex mt-6 space-x-4">
+              {socialLinks.map((social, index) => (
+                <Link key={index} href={social.href} target="_blank">
+                  {social.icon}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
