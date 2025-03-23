@@ -30,7 +30,7 @@ const HomeClient = () => {
   ];
   return (
     <>
-      <div className=" flex items-center  justify-center">
+      <div className=" flex items-center mb-12  justify-center">
         <div className="w-full h-full">
           <Carousel
             plugins={[plugin.current]}

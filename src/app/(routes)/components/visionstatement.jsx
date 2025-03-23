@@ -2,18 +2,10 @@ export default function VisionSection() {
   return (
     <div className="max-w-7xl mx-auto p-4 md:p-6">
       {/* Vision Header Section */}
-<div className="md:px-10">      <div className="border border-amber-400 rounded-lg p-6 mb-8">
-        <div className="flex flex-col md:flex-row gap-4">
-          <h2 className="text-3xl font-bold text-maroon-800 min-w-[120px]">
-            VISION
-          </h2>
-          <p className="text-maroon-800 italic px-10 font-semibold">
-            Siddhagiri math,through all its indigenous, nature centric &
-            sustainable initiatives intends to build healthy, competent,
-            creative, civilized and concious society.
-          </p>
-        </div>
-      </div></div>
+      <div className="md:px-10">
+        {" "}
+     
+      </div>
 
       {/* Content Sections */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -64,84 +56,9 @@ export default function VisionSection() {
         </div>
       </div>
 
-      {/* Feature Icons Section */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
-        <div className="flex flex-col items-center">
-          <div className="bg-amber-400 rounded-full p-4 w-20 h-20 flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-amber-800"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-18c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm-1 5v5h5v2h-7V9h2z" />
-            </svg>
-          </div>
-          <p className="text-center mt-2 font-semibold text-sm">
-            ESTABLISHED AROUND THE 7TH CENTURY
-          </p>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="bg-amber-400 rounded-full p-4 w-20 h-20 flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-amber-800"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm3 5c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm-6 0c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z" />
-            </svg>
-          </div>
-          <p className="text-center mt-2 font-semibold text-sm">
-            FROM A SPIRITUAL CENTER TO A SOCIAL INSTITUTION
-          </p>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="bg-amber-400 rounded-full p-4 w-20 h-20 flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-amber-800"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm-1 3h2v6h-2V7zm0 8h2v2h-2v-2z" />
-            </svg>
-          </div>
-          <p className="text-center mt-2 font-semibold text-sm">
-            ANCIENT HEMADPANTHI SHIVA TEMPLE
-          </p>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="bg-amber-400 rounded-full p-4 w-20 h-20 flex items-center justify-center">
-            <svg
-              className="w-10 h-10 text-amber-800"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm-1 3h2v6h-2V7zm0 8h2v2h-2v-2z" />
-            </svg>
-          </div>
-          <p className="text-center mt-2 font-semibold text-sm">
-            THE WISDOM AND GUIDANCE OF 50 MATHADHIPATIS
-          </p>
-        </div>
-      </div>
+ 
 
-      {/* Scroll to top button */}
-      <div className="flex justify-end mt-8">
-        <button className="bg-maroon-800 text-white p-2 rounded-md">
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 15l7-7 7 7"
-            />
-          </svg>
-        </button>
-      </div>
+
     </div>
   );
 }

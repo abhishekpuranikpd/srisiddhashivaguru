@@ -1,50 +1,77 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export default function PhotoGallery() {
-  // Sample data for gallery images
-  const galleryImages = [
-    { id: 1, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 1" },
-    { id: 2, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 2" },
-    { id: 3, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 3" },
-    { id: 4, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 4" },
-    { id: 5, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 5" },
-    { id: 6, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 6" },
-    { id: 7, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 7" },
-    { id: 8, src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg", alt: "Swamiji Image 8" },
-  ]
+
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-6">
-      {/* Header */}
-      <div className="flex flex-col items-center mb-8">
-        <div className="bg-amber-400 rounded-full p-2 w-16 h-16 flex items-center justify-center mb-2">
-          <svg className="w-8 h-8 text-amber-800" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4 5h16v14H4V5zm2 2v10h12V7H6zm8 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-6 6h8v2H8v-2z" />
-          </svg>
-        </div>
-        <h2 className="text-amber-600 font-bold text-lg border-b-2 border-amber-400 pb-1">PHOTO GALLERY</h2>
-      </div>
 
-      {/* Title */}
-      <h1 className="text-2xl md:text-4xl font-bold text-maroon-800 text-center mb-4">
-        Bhavmudra of Pujyashri Adrishya Kadsidhheshwar Swamiji
-      </h1>
-      <div className="w-48 h-1 bg-amber-400 mx-auto mb-12"></div>
+     <div className="py-16 bg-[#FFF8F0]">
+     <div className="container mx-auto px-4">
+       <div className="text-center mb-12">
+         <h2 className="text-3xl font-bold text-[#37131d] mb-2">Divine Glimpses</h2>
+         <div className="w-24 h-1 bg-[#C5341C] mx-auto mb-6"></div>
+         <p className="text-gray-700 max-w-3xl mx-auto">
+           Sacred moments from our spiritual gatherings, ceremonies, and seva activities
+         </p>
+       </div>
 
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {galleryImages.map((image) => (
-          <div
-            key={image.id}
-            className="relative aspect-square rounded-lg overflow-hidden border-2 border-amber-400 p-1"
-          >
-            <div className="absolute inset-0 bg-white rounded-lg overflow-hidden">
-              <Image src={image.src || "/placeholder.svg"} alt={image.alt} fill className="object-cover" />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+         {gallery.map((image, index) => (
+           <div key={index} className="relative overflow-hidden rounded-lg group h-48 md:h-64">
+             <img
+               src={image.url || "/placeholder.svg"}
+               alt={image.alt}
+               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+             />
+             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+               <p className="text-white p-4 text-sm">{image.alt}</p>
+             </div>
+           </div>
+         ))}
+       </div>
+
+       {/* <div className="text-center mt-10">
+         <Link href="/gallery">
+           <span className="inline-block bg-[#37131d] hover:bg-[#4a1a27] text-white font-medium py-3 px-8 rounded-lg transition-colors">
+             View Full Gallery
+           </span>
+         </Link>
+       </div> */}
+     </div>
+   </div>
+  );
 }
-
+const gallery = [
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Daily Rudrabhishek Ceremony"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Monday Pallakki Utsava"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Sri Dr. Shivkumar Swamiji's Pravachana"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Devotees at Guru Poornima Celebration"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Sadguru Jayanti Procession"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Annadanam Seva Program"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Temple Rituals at Siddharudh Math"
+  },
+  {
+    url: "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+    alt: "Spiritual Retreat at Chalakpaur"
+  }
+];

@@ -9,14 +9,26 @@ import VisionSection from "./(routes)/components/visionstatement";
 import HomeBlog from "./blog/homeblog";
 import JoinUsForm from "./(routes)/components/join-us";
 import ContactUsForm from "./(routes)/components/contact-us";
+import Link from "next/link";
+import PublicationsPage from "./(routes)/components/bookslist";
+import PageSeva from "./(routes)/components/seva-events";
 
 export default function Home() {
   return (
     <>
-      <HomeClient /> <HistorySection />
-      <VisionSection />
-      <GurukulFoundation />
-      <PhotoGallery />
+      <HomeClient />{" "}
+      <section id="about">
+        <HistorySection />
+      </section>
+      <section id="seva">
+        <PageSeva />
+      </section>
+      <section id="publication">
+        <PublicationsPage />
+      </section>
+      <section id="gallery">
+        <PhotoGallery />
+      </section>
       <AnnacharaSection />
       <HomeBlog />
     </>

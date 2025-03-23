@@ -20,27 +20,42 @@ const menuItems = [
   },
   {
     label: "About",
-    href: "#",
+    href: "",
     hasSubmenu: true,
     submenu: [
-      { label: "About Swamiji", href: "#" },
-      { label: "About Math", href: "" },
+      { label: "About Swamiji", href: "#about" },
+      { label: "About Math", href: "#" },
     ],
   },
   {
-    label: "Seva",
-    href: "#",
-  },
- 
-  {
     label: "Programs",
-    href: "#",
+    href: "/#seva",
     hasSubmenu: true,
     submenu: [
-      { label: "Daily Programs", href: "#" },
-      { label: "Weekly Programs", href: "" },
-      { label: "Monthly Programs", href: "" },
-      { label: "yearly Programs", href: "" },
+      {
+        label: "Daily Programs",
+        href: "/#seva",
+        description:
+          "Daily Rudrabhishek To Sadguru sri Siddharoodh Swamiji Moorti And & Monday Pallakki Utsava",
+      },
+      {
+        label: "Weekly Programs",
+        href: "/#seva",
+        description:
+          "Every Sunday & Shravana Masa Pravachana Sri Dr. Shivkumar Swamiji delivers Pravachana Every Sunday Evening And in the Occation Of Shravana Masa",
+      },
+      {
+        label: "Monthly Programs",
+        href: "/#seva",
+        description:
+          "Guru Poornima Mahotsava On the Time of Guru Poornima Sri Dr. Shivkumar Swamiji delivers Pravachana",
+      },
+      {
+        label: "Yearly Programs",
+        href: "/#seva",
+        description:
+          "Sadguru Jayanti Mahotsava Every year lots of devotees from all parts of the India visits to celebrate Sadguru Siddharoodha & Shivakumar Mahaswamiji Jayanti. This is Celebrated particularly in the month of April-May and November.",
+      },
     ],
   },
   {
@@ -49,28 +64,45 @@ const menuItems = [
     hasSubmenu: true,
     submenu: [
       { label: "Projects", href: "#" },
-      { label: "Publications", href: "" },
+      { label: "Publications", href: "/#publication" },
     ],
   },
   {
     label: "Contact US",
-    href: "#",
+    href: "/contact-us",
     hasSubmenu: true,
     submenu: [
-      { label: "Join with US", href: "#" },
+      { label: "Join with US", href: "/join-us" },
       { label: "Donation", href: "#" },
     ],
-  }, {
+  },
+  {
     label: "Blog",
     href: "/blog",
+    hasSubmenu: false,
   },
   {
     label: "Aashram's",
     href: "#",
     hasSubmenu: true,
     submenu: [
-      { label: "", href: "#" },
-      { label: "", href: "#" },
+      { label: "Bramha Vidyashram Chalakapur", href: "#" },
+      { label: "Chidambar Ashram Bidar", href: "#" },
+      { label: "Shivayogashram Aalur Vijayapur", href: "#" },
+      { label: "Sadhakashram BheemarayanGudi", href: "#" },
+      { label: "Kaivalya Dham Miraj Maharashtra", href: "#" },
+      { label: "Poorna Pragnya Yogashram Kalaburgi", href: "#" },
+      {
+        label: "Sri Siddha Bharati Trust Sindhagi Rampur Vijayapur",
+        href: "#",
+      },
+      { label: "Sri Siddharoodh math Hosalli Dharwad", href: "#" },
+      { label: "Sri Siddhashram Ambarnath Mumbai", href: "#" },
+
+      { label: "Sri Siddharoodh Aadhyatma Sameeti Nagpur", href: "#" },
+
+      { label: "Sri Siddhashram Mulsavalgi Vijaypur", href: "#" },
+      { label: "Sri Siddharoodh math Yalavantagi Kalburgi", href: "#" },
     ],
   },
   {
@@ -78,8 +110,35 @@ const menuItems = [
     href: "#",
     hasSubmenu: true,
     submenu: [
-      { label: "", href: "#" },
-      { label: "", href: "#" },
+      { label: "Shri Siddharoodh Swamiji High School Chalukapur", href: "#" },
+      { label: "Shri Shivakumarresh Gurukul Hr. PS. Bidar", href: "#" },
+      {
+        label: "N.K. Jabshetty Ayurvedic Medical College & P.G. Centre, Bidar",
+        href: "#",
+      },
+      {
+        label:
+          "Shri Chandrapppa Gourshetty Arts & Science Junior College, Bidar",
+        href: "#",
+      },
+      { label: "Indirabai G. Shetkar High School, Bidar", href: "#" },
+      {
+        label: "Sri Siddharoodh Public School (C.B.S.E. State Syllabus), Bidar",
+        href: "#",
+      },
+      { label: "Shri Sadguru Siddharoodh D.Ed. College, Bidar", href: "#" },
+      {
+        label: "Shri Siddharoodh Charitable Hospital & Research Centre",
+        href: "#",
+      },
+      {
+        label: "Shri Sadguru Siddharoodh Mahila Mahavidyalaya, Bidar",
+        href: "#",
+      },
+      {
+        label: "Shri Siddharoodh Swami P.U. College Chalukapur, Tq. Bhalki",
+        href: "#",
+      },
     ],
   },
 ];
@@ -110,9 +169,11 @@ const socialLinks = [
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolling, setScrolling] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState(null); // Track the active submenu
+  const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [activeDesktopSubmenu, setActiveDesktopSubmenu] = useState(null);
 
   const drawerRef = useRef(null);
+  const submenuRefs = useRef([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,21 +191,33 @@ const NavBar = () => {
       if (drawerRef.current && !drawerRef.current.contains(event.target)) {
         setIsOpen(false);
       }
+
+      // Close desktop submenu when clicking outside
+      if (
+        activeDesktopSubmenu !== null &&
+        submenuRefs.current[activeDesktopSubmenu] &&
+        !submenuRefs.current[activeDesktopSubmenu].contains(event.target)
+      ) {
+        setActiveDesktopSubmenu(null);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [activeDesktopSubmenu]);
 
   const toggleDrawer = () => {
     setIsOpen((prev) => !prev);
   };
 
-  // Function to toggle a submenu's visibility
   const toggleSubmenu = (index) => {
     setActiveSubmenu(activeSubmenu === index ? null : index);
+  };
+
+  const toggleDesktopSubmenu = (index) => {
+    setActiveDesktopSubmenu(activeDesktopSubmenu === index ? null : index);
   };
 
   return (
@@ -164,52 +237,89 @@ const NavBar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-8 items-center">
-  {menuItems.map((item, index) => (
-    <div key={index} className="relative group">
-      {/* Parent Menu Item */}
-      <Link href={item.href}>
-        <span className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05]">
-          {item.label}
-        </span>
-      </Link>
+          {menuItems.map((item, index) => (
+            <div key={index} className="relative">
+              {/* Parent Menu Item */}
+              <div
+                className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05] flex items-center"
+                onClick={() => item.hasSubmenu && toggleDesktopSubmenu(index)}
+              >
+                <Link href={item.hasSubmenu ? "#" : item.href}>
+                  <span>{item.label}</span>
+                </Link>
+                {item.hasSubmenu && (
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform duration-300 ${
+                      activeDesktopSubmenu === index ? "rotate-180" : ""
+                    }`}
+                  />
+                )}
+              </div>
 
-      {/* Submenu (Visible on Hover, Styled) */}
-      {item.hasSubmenu && (
-        <div className="absolute left-0 mt-2 px-4 bg-[#c5341c] rounded-xl shadow-lg p-2 min-w-max opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-300">
-          <nav className="list-none text-left font-semibold space-y-3">
-            {item.submenu.map((subItem, subIndex) => (
-              <li key={subIndex} className="whitespace-nowrap">
-                <Link href={subItem.href}>
-                  <span
-                    className="text-[#fff] cursor-pointer pb-2 hover:text-[#FFCB05] border-b-[3px]"
+              {/* Enhanced Submenu (Visible on Click) */}
+              {item.hasSubmenu && activeDesktopSubmenu === index && (
+                <div
+                  ref={(el) => (submenuRefs.current[index] = el)}
+                  className="fixed  left-1/2 transform -translate-x-1/2 mt-12
+                      bg-[#c5341c] rounded-xl shadow-lg p-6 w-auto max-w-6xl z-50 
+                      before:absolute before:content-[''] before:w-0 before:h-0 
+                   
+                      "
+                >
+                  <nav
+                    className={`grid gap-8 text-left font-semibold`}
                     style={{
-                      borderImage:
-                        "linear-gradient(to right, transparent 10%, #FFCB05 50%, transparent 90%)",
-                      borderImageSlice: 1,
+                      gridTemplateColumns: `repeat(${Math.min(
+                        item.submenu.length,
+                        4
+                      )}, minmax(200px, 1fr))`,
                     }}
                   >
-                    {subItem.label}
-                  </span>
-                </Link>
-              </li>
+                    {item.submenu.map((subItem, subIndex) => (
+                      <li key={subIndex} className="list-none">
+                        <Link href={subItem.href}>
+                          <div className="flex flex-col items-center text-center">
+                            {/* Conditionally Render Icon */}
+                            {subItem.icon && (
+                              <div className="bg-yellow-500 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-3">
+                                <svg
+                                  className="w-8 h-8 text-[#c5341c]"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                >
+                                  <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8z" />
+                                </svg>
+                              </div>
+                            )}
+
+                            {/* Label */}
+                            <span className="text-white font-bold text-md uppercase">
+                              {subItem.label}
+                            </span>
+
+                            {/* Read More */}
+                            <span className="text-yellow-400 font-medium text-sm mt-2 flex items-center gap-1 cursor-pointer hover:text-yellow-300">
+                              Read More →
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </nav>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* Social Icons */}
+          <div className="flex space-x-4">
+            {socialLinks.map((social, index) => (
+              <Link key={index} href={social.href} target="_blank">
+                {social.icon}
+              </Link>
             ))}
-          </nav>
+          </div>
         </div>
-      )}
-    </div>
-  ))}
-
-  {/* Social Icons */}
-  <div className="flex space-x-4">
-    {socialLinks.map((social, index) => (
-      <Link key={index} href={social.href} target="_blank">
-        {social.icon}
-      </Link>
-    ))}
-  </div>
-</div>
-
-
 
         {/* Mobile Hamburger */}
         <div className="flex lg:hidden">
@@ -224,7 +334,7 @@ const NavBar = () => {
         {/* Mobile Drawer */}
         <div
           ref={drawerRef}
-          className={`fixed top-0 h-full transition-all duration-300 w-[80%] ease-in-out lg:hidden bg-[#C5341c] shadow-lg ${
+          className={`fixed top-0 h-full transition-all duration-300 w-[80%] ease-in-out lg:hidden bg-[#C5341c] shadow-lg overflow-y-auto ${
             isOpen ? "left-0" : "-left-full"
           }`}
         >
@@ -241,7 +351,7 @@ const NavBar = () => {
               {menuItems.map((item, index) => (
                 <li key={index} className="border-b border-[#FFCB05] pb-2">
                   <div className="flex justify-between items-center">
-                    <Link href={item.href}>
+                    <Link href={item.hasSubmenu ? "#" : item.href}>
                       <span className="text-white hover:underline hover:underline-offset-8 flex items-center">
                         {item.label}
                       </span>
@@ -260,15 +370,22 @@ const NavBar = () => {
                     )}
                   </div>
 
-                  {/* Submenu */}
+                  {/* Enhanced Mobile Submenu */}
                   {item.hasSubmenu && activeSubmenu === index && (
-                    <ul className="ml-4 mt-2 space-y-2">
+                    <ul className="ml-4 mt-2 space-y-4">
                       {item.submenu.map((subItem, subIndex) => (
-                        <li key={subIndex}>
+                        <li key={subIndex} className="mb-3">
                           <Link href={subItem.href}>
-                            <span className="block text-white hover:text-[#ffcb05]">
-                              {subItem.label}
-                            </span>
+                            <div className="flex flex-col">
+                              <span className="block text-white hover:text-[#ffcb05] font-bold">
+                                {subItem.label}
+                              </span>
+                              {subItem.description && (
+                                <p className="text-white text-sm mt-1 font-normal">
+                                  {subItem.description}
+                                </p>
+                              )}
+                            </div>
                           </Link>
                         </li>
                       ))}
