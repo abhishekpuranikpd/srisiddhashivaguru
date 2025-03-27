@@ -12,6 +12,7 @@ import ContactUsForm from "./(routes)/components/contact-us";
 import Link from "next/link";
 import PublicationsPage from "./(routes)/components/bookslist";
 import PageSeva from "./(routes)/components/seva-events";
+import AboutAppaji from "./(routes)/components/aboutappaji";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <HomeClient />{" "}
       <section id="about">
         <HistorySection />
+        <AboutAppaji/>
       </section>
       <section id="seva">
         <PageSeva />
