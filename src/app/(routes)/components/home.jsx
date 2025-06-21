@@ -16,16 +16,16 @@ const HomeClient = () => {
   );
   const images = [
     {
-      src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg",
+      src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
     },
     {
-      src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408103/3.jpg_wexf0a.jpg",
+      src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
     },
     {
-        src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408138/matt01_lirnyi.jpg",
+        src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
       },
       {
-        src: "https://res.cloudinary.com/ds4mdy9oy/image/upload/v1736408103/3.jpg_wexf0a.jpg",
+        src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
       },
   ];
   return (

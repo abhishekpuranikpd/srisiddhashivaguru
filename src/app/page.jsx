@@ -13,20 +13,22 @@ import Link from "next/link";
 import PublicationsPage from "./(routes)/components/bookslist";
 import PageSeva from "./(routes)/components/seva-events";
 import AboutAppaji from "./(routes)/components/aboutappaji";
+import { db } from "../../lib/db";
 
-export default function Home() {
+export default async function Home() {
+  const books = await db.book.findMany({});
   return (
     <>
       <HomeClient />{" "}
       <section id="about">
         <HistorySection />
-        <AboutAppaji/>
+        <AboutAppaji />
       </section>
       <section id="seva">
         <PageSeva />
       </section>
       <section id="publication">
-        <PublicationsPage />
+        <PublicationsPage books={books} />
       </section>
       <section id="gallery">
         <PhotoGallery />

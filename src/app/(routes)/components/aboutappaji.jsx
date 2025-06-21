@@ -336,8 +336,9 @@ export default function AboutAppaji() {
                         1962
                       </h4>
                       <p className="text-gray-700">
-                        Took initiation (Guru Deeksha) from Sri Shivaputra
-                        Mahaswamiji
+                        Left home at the young age of 17 and 
+                        took initiation (Guru Deeksha) from Sri Shivaputra
+                        Mahaswamiji who was a direct disciple of Sri Siddharoodha maha Swamiji
                       </p>
                     </div>
                   </div>

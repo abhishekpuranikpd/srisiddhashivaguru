@@ -61,7 +61,11 @@ const ProfilePage = async () => {
                         Contacts | Messages
                       </li>
                     </a>
-                  
+                    <a href="/dashboard/books" className="flex-1">
+                      <li className="text-center text-white hover:bg-blue-500 border border-yellow-200 p-3">
+                        Upload Books
+                      </li>
+                    </a>
                   </ul>
                 </div>
               </div>
