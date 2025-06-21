@@ -27,6 +27,7 @@ const menuItems = [
       { label: "About Math", href: "#" },
     ],
   },
+
   {
     label: "Our Reach",
     href: "#",
@@ -142,7 +143,8 @@ const menuItems = [
         ],
       },
     ],
-  },{
+  },
+  {
     label: "Publications",
     href: "/#publication",
     hasSubmenu: false,
@@ -178,7 +180,7 @@ const menuItems = [
       },
     ],
   },
- 
+
   {
     label: "Contact US",
     href: "/contact-us",
@@ -188,7 +190,7 @@ const menuItems = [
       { label: "Donation", href: "#" },
     ],
   },
-  
+
   {
     label: "Aashram's",
     href: "#",
@@ -254,19 +256,11 @@ const menuItems = [
 const socialLinks = [
   {
     platform: "Youtube",
-    href: "https://youtube.com",
+    href: "https://www.youtube.com/channel/UCY6OgXcUJTggfsie2UvYGhw",
     icon: <Youtube className="h-6 w-6 text-white hover:text-gray-300" />,
   },
-  {
-    platform: "Twitter",
-    href: "https://twitter.com",
-    icon: <Twitter className="h-6 w-6 text-white hover:text-gray-300" />,
-  },
-  {
-    platform: "Facebook",
-    href: "https://facebook.com",
-    icon: <Facebook className="h-6 w-6 text-white hover:text-gray-300" />,
-  },
+ 
+ 
   {
     platform: "Instagram",
     href: "https://instagram.com",
@@ -352,122 +346,125 @@ const NavBar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-8 items-center">
-  {menuItems.map((item, index) => (
-    <div key={index} className="relative">
-      {/* Parent Menu Item */}
-      <div
-        className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05] flex items-center"
-        onClick={() => item.hasSubmenu && toggleDesktopSubmenu(index)}
-      >
-        <Link href={item.hasSubmenu ? "#" : item.href}>
-          <span>{item.label}</span>
-        </Link>
-        {item.hasSubmenu && (
-          <ChevronDown
-            className={`ml-1 h-4 w-4 transition-transform duration-300 ${
-              activeDesktopSubmenu === index ? "rotate-180" : ""
-            }`}
-          />
-        )}
-      </div>
-
-      {/* Enhanced Submenu (Visible on Click) */}
-      {item.hasSubmenu && activeDesktopSubmenu === index && (
-        <div
-          ref={(el) => (submenuRefs.current[index] = el)}
-          className="fixed left-1/2 transform -translate-x-1/2 mt-12
-                    bg-[#c5341c] rounded-xl shadow-lg p-6 w-auto max-w-6xl z-50"
-        >
-          <nav
-            className="grid gap-0 text-left font-semibold"
-            style={{
-              gridTemplateColumns: `repeat(${Math.min(
-                item.submenu.length,
-                4
-              )}, minmax(200px, 1fr))`,
-            }}
-          >
-            {item.submenu.map((subItem, subIndex) => (
-              <li key={subIndex} className="list-none">
-                <div className="flex flex-col items-center text-center">
-                  {/* Conditionally Render Icon */}
-                  {subItem.icon && (
-                    <div className="bg-yellow-500 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-3">
-                      <svg
-                        className="w-8 h-8 text-[#c5341c]"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8z" />
-                      </svg>
-                    </div>
-                  )}
-
-                  {/* Label */}
-                  <span className="text-white font-bold text-md uppercase">
-                    {subItem.label}
-                  </span>
-
-                  {/* Read More */}
-                  {subItem.hasSubmenu ? (
-                    <span
-                      className="text-yellow-400 font-medium text-sm mt-2 flex items-center gap-1 cursor-pointer hover:text-yellow-300"
-                      onClick={() => toggleInnerSubmenu(subIndex)}
-                    >
-                      Read More →
-                    </span>
-                  ) : (
-                    <Link href={subItem.href} className="text-yellow-400 font-medium text-sm mt-2 flex items-center gap-1 hover:text-yellow-300">
-                      Read More →
-                    </Link>
-                  )}
-                </div>
-
-                {/* Inner Submenu (Styled Like Main Submenu) */}
-                {subItem.hasSubmenu && expandedSubmenus[subIndex] && (
-                  <ul
-                    className="absolute left-0 mt-3 bg-[#c5341c] rounded-xl shadow-lg p-6 w-auto max-w-6xl z-50"
-                  >
-                    <div
-                      className="grid gap-0 text-left font-semibold"
-                      style={{
-                        gridTemplateColumns: `repeat(${Math.min(
-                          subItem.submenu.length,
-                          3
-                        )}, minmax(150px, 1fr))`,
-                      }}
-                    >
-                      {subItem.submenu.map((innerItem, innerIndex) => (
-                        <li key={innerIndex} className="list-none">
-                          <div className="flex flex-col items-center text-center">
-                            {/* Label */}
-                            <Link href={innerItem.href} className="text-white font-bold text-sm uppercase hover:underline hover:text-[#ffcb05]">
-                              {innerItem.label}
-                            </Link>
-                          </div>
-                        </li>
-                      ))}
-                    </div>
-                  </ul>
+          {menuItems.map((item, index) => (
+            <div key={index} className="relative">
+              {/* Parent Menu Item */}
+              <div
+                className="cursor-pointer text-[#fff] hover:underline hover:underline-offset-8 hover:rounded-lg hover:text-[#ffcb05] flex items-center"
+                onClick={() => item.hasSubmenu && toggleDesktopSubmenu(index)}
+              >
+                <Link href={item.hasSubmenu ? "#" : item.href}>
+                  <span>{item.label}</span>
+                </Link>
+                {item.hasSubmenu && (
+                  <ChevronDown
+                    className={`ml-1 h-4 w-4 transition-transform duration-300 ${
+                      activeDesktopSubmenu === index ? "rotate-180" : ""
+                    }`}
+                  />
                 )}
-              </li>
+              </div>
+
+              {/* Enhanced Submenu (Visible on Click) */}
+              {item.hasSubmenu && activeDesktopSubmenu === index && (
+                <div
+                  ref={(el) => (submenuRefs.current[index] = el)}
+                  className="fixed left-1/2 transform -translate-x-1/2 mt-12
+                    bg-[#c5341c] rounded-xl shadow-lg p-6 w-auto max-w-6xl z-50"
+                >
+                  <nav
+                    className="grid gap-0 text-left font-semibold"
+                    style={{
+                      gridTemplateColumns: `repeat(${Math.min(
+                        item.submenu.length,
+                        4
+                      )}, minmax(200px, 1fr))`,
+                    }}
+                  >
+                    {item.submenu.map((subItem, subIndex) => (
+                      <li key={subIndex} className="list-none">
+                        <div className="flex flex-col items-center text-center">
+                          {/* Conditionally Render Icon */}
+                          {subItem.icon && (
+                            <div className="bg-yellow-500 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-3">
+                              <svg
+                                className="w-8 h-8 text-[#c5341c]"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8z" />
+                              </svg>
+                            </div>
+                          )}
+
+                          {/* Label */}
+                          <span className="text-white font-bold text-md uppercase">
+                            {subItem.label}
+                          </span>
+
+                          {/* Read More */}
+                          {subItem.hasSubmenu ? (
+                            <span
+                              className="text-yellow-400 font-medium text-sm mt-2 flex items-center gap-1 cursor-pointer hover:text-yellow-300"
+                              onClick={() => toggleInnerSubmenu(subIndex)}
+                            >
+                              Read More →
+                            </span>
+                          ) : (
+                            <Link
+                              href={subItem.href}
+                              className="text-yellow-400 font-medium text-sm mt-2 flex items-center gap-1 hover:text-yellow-300"
+                            >
+                              Read More →
+                            </Link>
+                          )}
+                        </div>
+
+                        {/* Inner Submenu (Styled Like Main Submenu) */}
+                        {subItem.hasSubmenu && expandedSubmenus[subIndex] && (
+                          <ul className="absolute left-0 mt-3 bg-[#c5341c] rounded-xl shadow-lg p-6 w-auto max-w-6xl z-50">
+                            <div
+                              className="grid gap-0 text-left font-semibold"
+                              style={{
+                                gridTemplateColumns: `repeat(${Math.min(
+                                  subItem.submenu.length,
+                                  3
+                                )}, minmax(150px, 1fr))`,
+                              }}
+                            >
+                              {subItem.submenu.map((innerItem, innerIndex) => (
+                                <li key={innerIndex} className="list-none">
+                                  <div className="flex flex-col items-center text-center">
+                                    {/* Label */}
+                                    <Link
+                                      href={innerItem.href}
+                                      className="text-white font-bold text-sm uppercase hover:underline hover:text-[#ffcb05]"
+                                    >
+                                      {innerItem.label}
+                                    </Link>
+                                  </div>
+                                </li>
+                              ))}
+                            </div>
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </nav>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* Social Icons */}
+          <div className="flex space-x-4">
+            {socialLinks.map((social, index) => (
+              <Link key={index} href={social.href} target="_blank">
+                {social.icon}
+              </Link>
             ))}
-          </nav>
+          </div>
         </div>
-      )}
-    </div>
-  ))}
-
-  {/* Social Icons */}
-  <div className="flex space-x-4">
-    {socialLinks.map((social, index) => (
-      <Link key={index} href={social.href} target="_blank">
-        {social.icon}
-      </Link>
-    ))}
-  </div>
-</div>
-
 
         {/* Mobile Hamburger */}
         <div className="flex lg:hidden">

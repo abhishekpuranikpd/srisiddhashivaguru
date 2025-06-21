@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Link from "next/link";
 
 export default function AboutAppaji() {
   return (
@@ -31,15 +32,18 @@ export default function AboutAppaji() {
               and founder of Chidambara Ashrama in Bidar.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-amber-700 hover:bg-amber-800 text-white">
+              {/* <Button className="bg-amber-700 hover:bg-amber-800 text-white">
                 Learn More
-              </Button>
-              <Button
-                variant="outline"
-                className="border-amber-700 text-amber-700 hover:bg-amber-50"
-              >
-              Watch Discourses
-              </Button>
+              </Button> */}
+              <Link href="/pravachana">
+                {" "}
+                <Button
+                  variant="outline"
+                  className="border-amber-700 text-amber-700 hover:bg-amber-50"
+                >
+                  Watch Discourses / Pravachana
+                </Button>{" "}
+              </Link>
             </div>
           </div>
           <div className="order-1 md:order-2 flex justify-center">
@@ -336,9 +340,9 @@ export default function AboutAppaji() {
                         1962
                       </h4>
                       <p className="text-gray-700">
-                        Left home at the young age of 17 and 
-                        took initiation (Guru Deeksha) from Sri Shivaputra
-                        Mahaswamiji who was a direct disciple of Sri Siddharoodha maha Swamiji
+                        Left home at the young age of 17 and took initiation
+                        (Guru Deeksha) from Sri Shivaputra Mahaswamiji who was a
+                        direct disciple of Sri Siddharoodha maha Swamiji
                       </p>
                     </div>
                   </div>
@@ -546,21 +550,14 @@ export default function AboutAppaji() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className="aspect-square relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-              >
-                <Image
-                  src={`/placeholder.svg?height=300&width=300&text=Gallery Image ${
-                    i + 1
-                  }`}
-                  alt={`Gallery Image ${i + 1}`}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            ))}
+            <div className="aspect-square relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <Image
+                src="https://res.cloudinary.com/dnckhli5u/image/upload/v1742719116/spt7y2smjv11yhu2mq6t.jpg"
+                alt="Gallery Image 1"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </div>
           </div>
 
           <div className="text-center mt-8">

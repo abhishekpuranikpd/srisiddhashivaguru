@@ -18,15 +18,7 @@ const HomeClient = () => {
     {
       src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
     },
-    {
-      src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
-    },
-    {
-        src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
-      },
-      {
-        src: "https://res.cloudinary.com/dnckhli5u/image/upload/v1750489387/qdzdg5jdivwk0jjqtxfg.jpg",
-      },
+  
   ];
   return (
     <>
@@ -42,7 +34,7 @@ const HomeClient = () => {
               {images.map((image, index) => (
                 <CarouselItem
                   key={index}
-                  className="w-full lg:min-h-screen h-[400px]"
+                  className="w-full lg:min-h-screen h-[300px]"
                 >
                   <Image
                     src={image.src}

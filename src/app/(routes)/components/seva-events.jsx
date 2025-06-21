@@ -118,7 +118,7 @@ const PageSeva = () => {
           </div>
 
           <div className="text-center mt-10">
-            <Link href="/events">
+            <Link href="#">
               <span className="inline-block border-2 border-[#FFCB05] text-[#FFCB05] hover:bg-[#FFCB05] hover:text-[#37131d] font-medium py-3 px-8 rounded-lg transition-colors">
                 View Full Calendar
               </span>
@@ -186,7 +186,7 @@ const sevaPrograms = [
     description:
       "Celebration of Sadguru Siddharoodha & Shivakumar Mahaswamiji Jayanti with devotees from across India.",
     image:
-      "https://res.cloudinary.com/dnckhli5u/image/upload/v1742717898/fbbvhdnyt7i5fgyffpie.jpg",
+      "https://res.cloudinary.com/dnckhli5u/image/upload/v1750509247/ory6c9ksnieqpqaoy3uh.jpg",
   },
 ];
 
@@ -196,31 +196,31 @@ const events = [
     id: 1,
     title: "Guru Poornima Celebration",
     month: "Jul",
-    day: "23",
-    time: "6:00 AM - 9:00 PM",
+    day: "10",
+    // time: "6:00 AM - 9:00 PM",
     description:
       "Special abhishekam, homa, and pravachana by Sri Dr. Shivkumar Swamiji.",
-    location: "Main Temple, Siddharudh Math",
+    location: "Main Temple, Siddharudh Math Bidar",
   },
   {
     id: 2,
     title: "Shravana Masa Special Discourse",
     month: "Aug",
-    day: "15",
-    time: "6:30 PM - 8:30 PM",
+    // day: "15",
+    // time: "6:30 PM - 8:30 PM",
     description:
       "Discourse on the essence of Bhagavad Gita by Sri Dr. Shivkumar Swamiji.",
-    location: "Pravachana Hall, Siddharudh Math",
+    location: " Siddharudh Math Bidar",
   },
   {
     id: 3,
     title: "Sadguru Jayanti Mahotsava",
     month: "Nov",
-    day: "10",
-    time: "5:00 AM - 10:00 PM",
+    day: "15",
+    // time: "5:00 AM - 10:00 PM",
     description:
       "Grand celebration with special rituals, cultural programs, and mass feeding.",
-    location: "Siddharudh Math, Chalakpaur",
+    location: "Siddharudh Math, Bidar",
   },
 ];
 

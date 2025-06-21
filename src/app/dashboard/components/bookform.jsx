@@ -1,4 +1,3 @@
-// src/components/BookUploadForm.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -36,47 +35,89 @@ export default function BookUploadForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        required
-      />
-      <input
-        type="text"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        placeholder="Author"
-        required
-      />
-      <input
-        type="number"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        placeholder="Price"
-        required
-      />
-      <input
-        type="text"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        placeholder="Category"
-        required
-      />
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-        required
-      />
-      <input
-        type="file"
-        multiple
-        onChange={(e) => setFiles(Array.from(e.target.files).slice(0, 7))}
-      />
-      <button type="submit">Upload Book</button>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-xl mx-auto mt-10 p-6 border rounded-lg shadow-lg space-y-4 bg-white"
+    >
+      <h2 className="text-2xl font-bold mb-4">Upload a Book</h2>
+
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Book title"
+          required
+          className="border px-3 py-2 rounded"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Author</label>
+        <input
+          type="text"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          placeholder="Author name"
+          required
+          className="border px-3 py-2 rounded"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Price</label>
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          placeholder="Price in USD"
+          required
+          className="border px-3 py-2 rounded"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Category</label>
+        <input
+          type="text"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          placeholder="Book category"
+          required
+          className="border px-3 py-2 rounded"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Description</label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Short description"
+          required
+          className="border px-3 py-2 rounded resize-none"
+          rows="4"
+        />
+      </div>
+
+      <div className="flex flex-col">
+        <label className="mb-1 font-medium">Upload Files (max 7)</label>
+        <input
+          type="file"
+          multiple
+          accept=".pdf,.epub,.jpg,.png"
+          onChange={(e) => setFiles(Array.from(e.target.files).slice(0, 7))}
+          className="border px-3 py-2 rounded"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+      >
+        Upload Book
+      </button>
     </form>
   );
 }

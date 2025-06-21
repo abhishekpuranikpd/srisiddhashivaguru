@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BookGallery } from "./book-gallery";
 
-export default function PublicationsPage({books}) {
+export default function PublicationsPage({ books }) {
   return (
     <div className="min-h-screen bg-[#FFF8F0] font-['Playfair_Display',serif]">
       {/* Hero Section with Swamiji Image */}
@@ -110,7 +110,7 @@ export default function PublicationsPage({books}) {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-[#FFCB05] mb-2">
-           Publications 
+              Publications
             </h2>
             <div className="w-24 h-1 bg-[#FFCB05] mx-auto mb-6"></div>
             <p className="text-white max-w-3xl mx-auto">
@@ -180,5 +180,3 @@ export default function PublicationsPage({books}) {
     </div>
   );
 }
-
-

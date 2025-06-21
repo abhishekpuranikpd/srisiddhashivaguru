@@ -53,6 +53,15 @@ export const BookPreviewModal = ({ book, onClose }) => {
     }
   };
 
+  const handleBuyNowClick = () => {
+    const whatsappNumber = "919845547791"; // International format without '+'
+    const message = `I'm interested in buying the book: ${book.title}`;
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappLink, "_blank");
+  };
+
   if (!book || totalPages === 0) return null;
 
   return (
@@ -104,6 +113,13 @@ export const BookPreviewModal = ({ book, onClose }) => {
 
               <p className="text-white/80 text-sm mb-6">{book.description}</p>
 
+              <button
+                onClick={handleBuyNowClick}
+                className="mt-4 bg-[#FFCB05] text-[#37131d] px-4 py-2 rounded-full font-bold transition-colors hover:bg-[#e6b804]"
+              >
+                Buy Now
+              </button>
+
               <div className="mt-auto flex items-center justify-center gap-2 text-[#FFCB05]">
                 <BookOpen className="w-5 h-5" />
                 <span className="font-['Playfair_Display',serif]">
@@ -121,8 +137,7 @@ export const BookPreviewModal = ({ book, onClose }) => {
 
             <div
               ref={bookRef}
-              className="relative overflow-hidden rounded-lg border border-[#37131d]/20 bg-white flex-grow"
-              style={{ minHeight: "400px" }}
+              className="relative overflow-hidden h-32 rounded-lg border border-[#37131d]/20 bg-white flex-grow"
             >
               <div
                 className="flex transition-transform duration-300 ease-out h-full"
@@ -170,7 +185,7 @@ export const BookPreviewModal = ({ book, onClose }) => {
                   <img
                     src={img}
                     alt={`Thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-32 object-cover"
                   />
                 </button>
               ))}
