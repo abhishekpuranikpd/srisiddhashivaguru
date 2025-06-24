@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Play, Calendar, User } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -12,10 +12,9 @@ const YOUTUBE_CHANNEL_URL =
 const fetchVideos = async (pageToken = "") => {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=5&pageToken=${pageToken}`
+      `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6&pageToken=${pageToken}`
     );
     const data = await response.json();
-    console.log("Fetched video data:", data);
     return data;
   } catch (error) {
     console.error("Error fetching videos:", error);
@@ -37,15 +36,20 @@ export default function PravachanaPage() {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [nextPageToken, setNextPageToken] = useState("");
 
+  const videoRef = useRef(null); // ref for scrolling to player
+
   useEffect(() => {
     const loadVideos = async () => {
       const videoData = await fetchVideos();
       if (videoData && videoData.items.length > 0) {
-        setVideos(videoData.items);
-        setSelectedVideo(videoData.items[0]); // Set the first video as the selected video
+        const validVideos = videoData.items.filter(
+          (item) => item.id.kind === "youtube#video" && item.id.videoId
+        );
+        setVideos(validVideos);
+        setSelectedVideo(validVideos[0]);
         setNextPageToken(videoData.nextPageToken);
       } else {
-        window.location.href = YOUTUBE_CHANNEL_URL; // Redirect to YouTube channel if no videos are found
+        window.location.href = YOUTUBE_CHANNEL_URL;
       }
     };
 
@@ -55,9 +59,22 @@ export default function PravachanaPage() {
   const loadMoreVideos = async () => {
     const videoData = await fetchVideos(nextPageToken);
     if (videoData && videoData.items.length > 0) {
-      setVideos((prevVideos) => [...prevVideos, ...videoData.items]);
+      const newValidVideos = videoData.items.filter(
+        (item) => item.id.kind === "youtube#video" && item.id.videoId
+      );
+      setVideos((prev) => [...prev, ...newValidVideos]);
       setNextPageToken(videoData.nextPageToken);
     }
+  };
+
+  const handleVideoSelect = (video) => {
+    setSelectedVideo(video);
+    setTimeout(() => {
+      videoRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
   };
 
   return (
@@ -80,8 +97,11 @@ export default function PravachanaPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
         {/* Featured Video */}
-        {selectedVideo && (
-          <div className="bg-white rounded-xl overflow-hidden shadow-lg mb-8">
+        {selectedVideo && selectedVideo.id?.videoId && (
+          <div
+            ref={videoRef}
+            className="bg-white rounded-xl overflow-hidden shadow-lg mb-8"
+          >
             <div className="relative aspect-video bg-black">
               <iframe
                 className="absolute inset-0 w-full h-full"
@@ -92,13 +112,10 @@ export default function PravachanaPage() {
                 allowFullScreen
               ></iframe>
             </div>
-
-            {/* Video Info */}
             <div className="p-6">
               <h2 className="text-2xl font-bold text-[#37131d] mb-3 font-['Playfair_Display',serif]">
                 {selectedVideo.snippet.title}
               </h2>
-
               <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-600">
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
@@ -109,7 +126,6 @@ export default function PravachanaPage() {
                   <span>{selectedVideo.snippet.channelTitle}</span>
                 </div>
               </div>
-
               <p className="text-gray-700 mb-6">
                 {selectedVideo.snippet.description}
               </p>
@@ -122,32 +138,35 @@ export default function PravachanaPage() {
           More Videos
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos.slice(1).map((video) => (
-            <motion.div
-              key={video.id.videoId}
-              whileHover={{ scale: 1.02 }}
-              className="bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
-              onClick={() => setSelectedVideo(video)}
-            >
-              <div className="flex flex-col sm:flex-row">
-                <div className="relative sm:w-1/3">
-                  <img
-                    src={video.snippet.thumbnails.high.url}
-                    alt={video.snippet.title}
-                    className="w-full aspect-video sm:h-full object-cover"
-                  />
-                </div>
-                <div className="p-3 sm:w-2/3">
-                  <h4 className="font-medium text-[#37131d] line-clamp-2 mb-1">
-                    {video.snippet.title}
-                  </h4>
-                  <div className="flex items-center gap-2 text-xs text-gray-600">
-                    <span>{formatDate(video.snippet.publishedAt)}</span>
+          {videos
+            .slice(1)
+            .filter((video) => video.id.kind === "youtube#video" && video.id.videoId)
+            .map((video) => (
+              <motion.div
+                key={video.id.videoId}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+                onClick={() => handleVideoSelect(video)}
+              >
+                <div className="flex flex-col sm:flex-row">
+                  <div className="relative sm:w-1/3">
+                    <img
+                      src={video.snippet.thumbnails.high.url}
+                      alt={video.snippet.title}
+                      className="w-full aspect-video sm:h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-3 sm:w-2/3">
+                    <h4 className="font-medium text-[#37131d] line-clamp-2 mb-1">
+                      {video.snippet.title}
+                    </h4>
+                    <div className="flex items-center gap-2 text-xs text-gray-600">
+                      <span>{formatDate(video.snippet.publishedAt)}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
         </div>
 
         {/* View More Button */}
