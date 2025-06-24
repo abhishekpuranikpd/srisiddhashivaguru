@@ -9,9 +9,10 @@ export default function BookUploadForm() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [files, setFiles] = useState([]);
-
+  const [loading, setloading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("author", author);
@@ -29,8 +30,10 @@ export default function BookUploadForm() {
 
     if (response.ok) {
       console.log("Book uploaded successfully");
+      setloading(false);
     } else {
       console.error("Failed to upload book");
+      setloading(false);
     }
   };
 
@@ -48,7 +51,6 @@ export default function BookUploadForm() {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Book title"
-          required
           className="border px-3 py-2 rounded"
         />
       </div>
@@ -60,7 +62,6 @@ export default function BookUploadForm() {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           placeholder="Author name"
-          required
           className="border px-3 py-2 rounded"
         />
       </div>
@@ -72,7 +73,6 @@ export default function BookUploadForm() {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           placeholder="Price in USD"
-          required
           className="border px-3 py-2 rounded"
         />
       </div>
@@ -84,7 +84,6 @@ export default function BookUploadForm() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           placeholder="Book category"
-          required
           className="border px-3 py-2 rounded"
         />
       </div>
@@ -95,7 +94,6 @@ export default function BookUploadForm() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Short description"
-          required
           className="border px-3 py-2 rounded resize-none"
           rows="4"
         />
@@ -114,9 +112,10 @@ export default function BookUploadForm() {
 
       <button
         type="submit"
+        disabled={loading}
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
       >
-        Upload Book
+        {loading ? "Uploding" : "  Upload Book"}
       </button>
     </form>
   );

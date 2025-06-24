@@ -89,18 +89,18 @@ model JoinWithUS {
 
 model Book {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  author      String
-  price       Float
-  category    String
-  description String
-  coverImage1 String?  // First image URL
-  coverImage2 String?  // Second image URL
-  coverImage3 String?  // Third image URL
-  coverImage4 String?  // Fourth image URL
-  coverImage5 String?  // Fifth image URL
-  coverImage6 String?  // Sixth image URL
-  coverImage7 String?  // Seventh image URL
+  title       String?
+  author      String?
+  price       Float?
+  category    String?
+  description String?
+  coverImage1 String? // First image URL
+  coverImage2 String? // Second image URL
+  coverImage3 String? // Third image URL
+  coverImage4 String? // Fourth image URL
+  coverImage5 String? // Fifth image URL
+  coverImage6 String? // Sixth image URL
+  coverImage7 String? // Seventh image URL
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
